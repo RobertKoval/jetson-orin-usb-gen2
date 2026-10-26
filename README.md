@@ -38,40 +38,56 @@ The original T194 `port_speed_quirk` is already off on T234. Disabling it is not
 
 A root hub showing `10000M` does **not** establish that every physical downstream port supports 10 Gb/s. Check the actual device link. A C↔C detection problem is separate from the device-speed cap.
 
-## Getting started
+## Download and use the executable
 
-1. Obtain the **R36.5 BSP sources** from [NVIDIA](https://developer.nvidia.com/embedded/jetson-linux-r365) and matching installed kernel headers.
-2. Build without changing the running machine:
+Download the versioned source bundle (Python standard library + a small native C helper; no pip dependencies):
 
-   ```sh
-   git clone https://github.com/RobertKoval/jetson-orin-usb-gen2.git
-   cd jetson-orin-usb-gen2
-   ./scripts/build.sh /path/to/Linux_for_Tegra/source/kernel/kernel-jammy-src
-   ```
+```sh
+curl -fLO https://github.com/RobertKoval/jetson-orin-usb-gen2/releases/download/v0.2.0/jetson-orin-usb-gen2-v0.2.0.tar.gz
+curl -fLO https://github.com/RobertKoval/jetson-orin-usb-gen2/releases/download/v0.2.0/jetson-orin-usb-gen2-v0.2.0.tar.gz.sha256
+sha256sum -c jetson-orin-usb-gen2-v0.2.0.tar.gz.sha256
+tar -xzf jetson-orin-usb-gen2-v0.2.0.tar.gz
+cd jetson-orin-usb-gen2-v0.2.0
+./orin-usb-gen2 --help
+```
 
-   The script checks the exact input/output source hashes, applies the patch with no fuzz, and builds the module and register tool. It does not install or load anything.
-3. Follow the [clean-boot installation recipe](docs/INSTALL.md). **Do not `rmmod` the unmodified stock driver to follow this README.**
-4. Once the patched driver is loaded and the default gadget works at Gen1:
+With the patched driver already loaded:
 
-   ```sh
-   sudo python3 tools/link-speed.py status
-   sudo python3 tools/link-speed.py gen2
-   ```
+```sh
+./orin-usb-gen2 build-helper
+sudo ./orin-usb-gen2 status
+sudo ./orin-usb-gen2 enable    # Gen2 for this session
+sudo ./orin-usb-gen2 disable   # Gen1 for this session
+```
 
-   This is a transient register change, not boot persistence. The tool accepts only the tested board/driver, disconnects the gadget before writing, and attempts to restore the previous generation if configuration fails.
-5. Confirm `10000M` on the host, `configured` / `super-speed-plus` on Orin, then run the [data-integrity test](docs/INSTALL.md#verify-real-data).
+For an initial driver installation and boot persistence:
 
-The exact published driver source matches the successful experiment. The guarded public wrapper is a new packaging layer: its status and rejection paths are checked, but the complete public clean-boot recipe has **not** been exercised end to end. The original successful experiment used a guarded, build-specific live migration; those private-offset helpers are deliberately not distributed here.
+```sh
+./orin-usb-gen2 build /path/to/Linux_for_Tegra/source/kernel/kernel-jammy-src
+sudo ./orin-usb-gen2 install --dry-run
+sudo ./orin-usb-gen2 install
+# Read the result and reboot when other work can stop; there is no automatic reboot.
+# After the patched driver is loaded:
+sudo orin-usb-gen2 enable --permanent
+sudo orin-usb-gen2 disable --permanent
+```
+
+`--permanent` sets the runtime generation and the next-boot policy. Disabling permanent Gen2 leaves the patched driver installed, operating at Gen1. `restore-driver` separately restores the original module/initrd on disk for the next boot. **No command hot-unloads the stock driver.**
+
+The installer preserves original module/initrd backups, checks the generated initramfs, and deploys a root-owned executable and a systemd oneshot. The boot service can arm Gen2 with no USB host attached; that is reported as *armed*, not as a verified connected10G link. Runtime switching requires a configured connection and verifies both register readback and negotiated device state. Concurrent mutations are rejected; failures attempt and verify rollback.
+
+Read [installation and rollback](docs/INSTALL.md), [persistence/recovery guarantees](docs/PERSISTENCE.md), and [current validation](docs/VALIDATION.md). A successful setting is not a throughput or data-integrity test; confirm host speed and run the probes.
 
 ## Files
 
 - `patches/`: exact tested XUDC patch; no kernel tree or binary module.
+- `orin-usb-gen2`: executable CLI for runtime mode, diagnostics, installation and boot policy.
 - `scripts/build.sh`: source-identity checks and native build.
 - `tools/`: guarded runtime device-speed control; no firmware/fuse writes.
 - `bench/`: bounded-memory bulk and SHA-256 transfer probes, no baked-in host addresses.
 - `docs/`: installation, rollback, findings, incident explanation and validation limits.
 
-No automatic boot-time Gen2 enablement or unattended installer is provided. Original benchmark scripts and private machine/crash artifacts are not required to use the patch.
+Boot-time Gen2 is opt-in through `enable --permanent`; installation alone does not enable it. Kernel upgrades, other boards, Secure Boot integration and recovery images remain outside the supported recipe. Private machine/crash artifacts and address-dependent recovery helpers are not distributed.
 
 ## Contributing
 

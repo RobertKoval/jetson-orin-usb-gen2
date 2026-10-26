@@ -20,5 +20,9 @@ actual=$(sha256sum "$root/build/tegra-xudc.c" | cut -d' ' -f1)
 [[ "$actual" == 3ff1616f8924e006d724fc4568025f9f1a11e49ddb801a3a7e56694efcc20f00 ]] || { echo 'Patched source differs from the tested source.' >&2; exit 1; }
 printf 'obj-m += tegra-xudc.o\n' > "$root/build/Makefile"
 make -C "/lib/modules/$(uname -r)/build" M="$root/build" modules
-cc -O2 -Wall -Wextra -Werror "$root/tools/padctl.c" -o "$root/build/orin-usb-speed"
+helper_tmp=$(mktemp "$root/build/.orin-usb-speed.XXXXXX")
+trap 'rm -f -- "$helper_tmp"' EXIT
+cc -O2 -Wall -Wextra -Werror "$root/tools/padctl.c" -o "$helper_tmp"
+chmod 755 "$helper_tmp"
+mv -f -- "$helper_tmp" "$root/build/orin-usb-speed"
 printf '\nBuilt %s\nNo module loaded or installed; no registers changed.\n' "$root/build/tegra-xudc.ko"

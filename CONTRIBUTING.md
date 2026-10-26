@@ -10,7 +10,8 @@ Build verification:
 
 ```sh
 bash -n scripts/build.sh
-python3 -m py_compile tools/link-speed.py bench/transfer.py bench/integrity.py
+python3 -m unittest discover -s tests -v
+python3 -m py_compile orin_usb_gen2.py orin_install.py bench/transfer.py bench/integrity.py
 ./scripts/build.sh /path/to/R36.5/kernel/kernel-jammy-src
 ```
 
