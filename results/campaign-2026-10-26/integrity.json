@@ -1,0 +1,24 @@
+{
+  "generation": 2,
+  "timing_includes_hash": true,
+  "checks": [
+    {
+      "net": "ncm",
+      "direction": "ml-orin",
+      "tag": "campaign-after-stress",
+      "bytes": 1342177280,
+      "sha256": "78e2ca85f0fb48ea122cff838c9d6239d22cc8daebee83c2a2c4402510475d64",
+      "verified": true,
+      "seconds_including_hash": 3.4808639439870603
+    },
+    {
+      "net": "ncm",
+      "direction": "orin-ml",
+      "tag": "campaign-after-stress",
+      "bytes": 1342177280,
+      "sha256": "78e2ca85f0fb48ea122cff838c9d6239d22cc8daebee83c2a2c4402510475d64",
+      "verified": true,
+      "seconds_including_hash": 3.44660093299899
+    }
+  ]
+}

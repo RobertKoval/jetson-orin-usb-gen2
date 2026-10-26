@@ -1,0 +1,13 @@
+{
+  "host": {
+    "ssh": "user@pc",
+    "ips": {"ncm": "192.168.55.100", "rndis": "192.168.56.100"},
+    "ifaces": {"ncm": "enx001122334455", "rndis": "enx001122334456"}
+  },
+  "orin": {
+    "ssh": "user@orin",
+    "ips": {"ncm": "192.168.55.1", "rndis": "192.168.56.1"},
+    "ifaces": {"ncm": "usb1", "rndis": "usb0"},
+    "bridge": "l4tbr0"
+  }
+}

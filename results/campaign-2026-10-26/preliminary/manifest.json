@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-26",
+  "probe_sha256": "d26c03ffa92827d197ff8888946c49820b5e56fdd27fe0dbb2a042485c57eebe",
+  "smoke": false,
+  "pairs": 6,
+  "pair_orders": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      1
+    ]
+  ],
+  "complete": false,
+  "environment": {
+    "orin": {
+      "kernel": "5.15.185-tegra",
+      "cpu_model": [
+        "ARMv8 Processor rev 1 (v8l)"
+      ]
+    },
+    "host": {
+      "kernel": "7.0.0-38-generic",
+      "cpu_model": [
+        "AMD Ryzen 9 5950X 16-Core Processor"
+      ]
+    }
+  },
+  "fixed_settings": {
+    "host_ncm": {
+      "tx_timer_usecs": "400",
+      "min_tx_pkt": "13312",
+      "tx_max": "16384",
+      "rx_max": "16384"
+    },
+    "qmult": 5,
+    "interfaces": {
+      "orin": {
+        "ncm": {
+          "mtu": 1500,
+          "rps": "000"
+        },
+        "rndis": {
+          "mtu": 1500,
+          "rps": "000"
+        }
+      },
+      "host": {
+        "ncm": {
+          "mtu": 1500,
+          "rps": "0000dfff"
+        },
+        "rndis": {
+          "mtu": 1500,
+          "rps": "00000000"
+        }
+      }
+    }
+  },
+  "driver": "orin-gen2-probe-3",
+  "initial_host_link_mbit": 10000,
+  "failure_type": "RuntimeError",
+  "failed_trial": {
+    "pair": 1,
+    "generation": 2,
+    "transport": "ncm",
+    "direction": "host-orin",
+    "kind": "latency",
+    "label": "unloaded"
+  },
+  "restored": true
+}

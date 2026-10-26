@@ -1,5 +1,7 @@
 # Validation record — 2026-10-26
 
+This page records the initial experiment. See [the later repeated campaign](BENCHMARKS.md) for expanded measurements and the newly observed unresolved TX-queue stalls.
+
 ## Environment
 
 One NVIDIA Jetson AGX Orin Developer Kit64GB, Jetson Linux R36.5, kernel5.15.185-tegra. Linux x86-64 host, verified10G Type-A port and A↔C cable. CPU buffers only; no GPU staging, LLM execution, weight quantization or NVMe offload was measured.

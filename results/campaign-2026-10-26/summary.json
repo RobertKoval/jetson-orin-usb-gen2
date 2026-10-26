@@ -1,0 +1,2069 @@
+{
+  "manifest": {
+    "date": "2026-10-26",
+    "probe_sha256": "d26c03ffa92827d197ff8888946c49820b5e56fdd27fe0dbb2a042485c57eebe",
+    "smoke": false,
+    "pairs": 6,
+    "pair_orders": [
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "settle_s": 20,
+    "protocol_revision": 2,
+    "complete": false,
+    "environment": {
+      "orin": {
+        "kernel": "5.15.185-tegra",
+        "cpu_model": [
+          "ARMv8 Processor rev 1 (v8l)"
+        ]
+      },
+      "host": {
+        "kernel": "7.0.0-38-generic",
+        "cpu_model": [
+          "AMD Ryzen 9 5950X 16-Core Processor"
+        ]
+      }
+    },
+    "fixed_settings": {
+      "host_ncm": {
+        "tx_timer_usecs": "400",
+        "min_tx_pkt": "13312",
+        "tx_max": "16384",
+        "rx_max": "16384"
+      },
+      "qmult": 5,
+      "interfaces": {
+        "orin": {
+          "ncm": {
+            "mtu": 1500,
+            "rps": "000"
+          },
+          "rndis": {
+            "mtu": 1500,
+            "rps": "000"
+          }
+        },
+        "host": {
+          "ncm": {
+            "mtu": 1500,
+            "rps": "0000dfff"
+          },
+          "rndis": {
+            "mtu": 1500,
+            "rps": "00000000"
+          }
+        }
+      }
+    },
+    "driver": "orin-gen2-probe-3",
+    "initial_host_link_mbit": 10000,
+    "failure_type": "RuntimeError",
+    "failed_trial": {
+      "pair": 4,
+      "generation": 2,
+      "label": "under-ncm-load"
+    },
+    "restored": true
+  },
+  "coverage": {
+    "complete_pairs": [
+      1,
+      2,
+      3
+    ],
+    "selected_valid_records": 64,
+    "all_valid_records": 74,
+    "unpaired_valid_records": 10,
+    "failed_records": [
+      {
+        "pair": 4,
+        "generation": 2,
+        "label": "under-ncm-load",
+        "valid": false,
+        "failure_type": "RuntimeError",
+        "reason": "probe_or_control_failure"
+      }
+    ],
+    "selection": "Longest fully completed paired prefix; unmatched valid rows retained in raw data"
+  },
+  "valid_records": 64,
+  "unloaded_rtt_samples": 122400,
+  "qualified_loaded_rtt_samples": 4000,
+  "latency": [
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1623.651,
+        "min": 1614.747,
+        "max": 1631.827,
+        "runs": 3,
+        "values": [
+          1614.747,
+          1623.651,
+          1631.827
+        ]
+      },
+      "p95_us": {
+        "median": 1651.171,
+        "min": 1638.228,
+        "max": 1698.787,
+        "runs": 3,
+        "values": [
+          1638.228,
+          1651.171,
+          1698.787
+        ]
+      },
+      "p99_us": {
+        "median": 1674.731,
+        "min": 1655.498,
+        "max": 1777.759,
+        "runs": 3,
+        "values": [
+          1655.498,
+          1674.731,
+          1777.759
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1410.718,
+        "min": 1398.662,
+        "max": 1425.155,
+        "runs": 3,
+        "values": [
+          1398.662,
+          1410.718,
+          1425.155
+        ]
+      },
+      "p95_us": {
+        "median": 1469.889,
+        "min": 1454.583,
+        "max": 1494.976,
+        "runs": 3,
+        "values": [
+          1454.583,
+          1469.889,
+          1494.976
+        ]
+      },
+      "p99_us": {
+        "median": 1523.089,
+        "min": 1492.724,
+        "max": 1529.326,
+        "runs": 3,
+        "values": [
+          1492.724,
+          1523.089,
+          1529.326
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1426.515,
+        "min": 1417.662,
+        "max": 1432.108,
+        "runs": 3,
+        "values": [
+          1417.662,
+          1432.108,
+          1426.515
+        ]
+      },
+      "p95_us": {
+        "median": 1814.961,
+        "min": 1812.069,
+        "max": 1824.203,
+        "runs": 3,
+        "values": [
+          1814.961,
+          1824.203,
+          1812.069
+        ]
+      },
+      "p99_us": {
+        "median": 1860.25,
+        "min": 1839.353,
+        "max": 1978.584,
+        "runs": 3,
+        "values": [
+          1978.584,
+          1839.353,
+          1860.25
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 6925.096,
+        "min": 6835.921,
+        "max": 6939.557,
+        "runs": 3,
+        "values": [
+          6925.096,
+          6939.557,
+          6835.921
+        ]
+      },
+      "p95_us": {
+        "median": 7757.721,
+        "min": 7035.319,
+        "max": 7967.489,
+        "runs": 3,
+        "values": [
+          7035.319,
+          7967.489,
+          7757.721
+        ]
+      },
+      "p99_us": {
+        "median": 8985.622,
+        "min": 7063.96,
+        "max": 10791.512,
+        "runs": 3,
+        "values": [
+          7063.96,
+          8985.622,
+          10791.512
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1622.31,
+        "min": 1620.166,
+        "max": 1628.113,
+        "runs": 3,
+        "values": [
+          1628.113,
+          1622.31,
+          1620.166
+        ]
+      },
+      "p95_us": {
+        "median": 1688.352,
+        "min": 1681.152,
+        "max": 1694.699,
+        "runs": 3,
+        "values": [
+          1694.699,
+          1688.352,
+          1681.152
+        ]
+      },
+      "p99_us": {
+        "median": 1795.989,
+        "min": 1786.21,
+        "max": 1813.524,
+        "runs": 3,
+        "values": [
+          1786.21,
+          1813.524,
+          1795.989
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1410.586,
+        "min": 1404.699,
+        "max": 1412.643,
+        "runs": 3,
+        "values": [
+          1412.643,
+          1410.586,
+          1404.699
+        ]
+      },
+      "p95_us": {
+        "median": 1464.543,
+        "min": 1460.693,
+        "max": 1474.195,
+        "runs": 3,
+        "values": [
+          1464.543,
+          1460.693,
+          1474.195
+        ]
+      },
+      "p99_us": {
+        "median": 1543.245,
+        "min": 1490.547,
+        "max": 1544.344,
+        "runs": 3,
+        "values": [
+          1544.344,
+          1490.547,
+          1543.245
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1464.533,
+        "min": 1441.688,
+        "max": 1470.462,
+        "runs": 3,
+        "values": [
+          1470.462,
+          1441.688,
+          1464.533
+        ]
+      },
+      "p95_us": {
+        "median": 1671.457,
+        "min": 1612.305,
+        "max": 1840.721,
+        "runs": 3,
+        "values": [
+          1612.305,
+          1840.721,
+          1671.457
+        ]
+      },
+      "p99_us": {
+        "median": 1871.054,
+        "min": 1837.821,
+        "max": 1886.477,
+        "runs": 3,
+        "values": [
+          1837.821,
+          1871.054,
+          1886.477
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 6712.196,
+        "min": 6326.448,
+        "max": 6720.32,
+        "runs": 3,
+        "values": [
+          6326.448,
+          6712.196,
+          6720.32
+        ]
+      },
+      "p95_us": {
+        "median": 7083.712,
+        "min": 6783.496,
+        "max": 7533.171,
+        "runs": 3,
+        "values": [
+          6783.496,
+          7083.712,
+          7533.171
+        ]
+      },
+      "p99_us": {
+        "median": 7554.724,
+        "min": 7527.926,
+        "max": 9340.584,
+        "runs": 3,
+        "values": [
+          7554.724,
+          7527.926,
+          9340.584
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 80.18,
+        "min": 80.152,
+        "max": 82.631,
+        "runs": 3,
+        "values": [
+          80.152,
+          82.631,
+          80.18
+        ]
+      },
+      "p95_us": {
+        "median": 87.38,
+        "min": 84.312,
+        "max": 92.861,
+        "runs": 3,
+        "values": [
+          84.312,
+          92.861,
+          87.38
+        ]
+      },
+      "p99_us": {
+        "median": 101.181,
+        "min": 92.832,
+        "max": 102.212,
+        "runs": 3,
+        "values": [
+          92.832,
+          102.212,
+          101.181
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 481.515,
+        "min": 476.691,
+        "max": 494.416,
+        "runs": 3,
+        "values": [
+          476.691,
+          494.416,
+          481.515
+        ]
+      },
+      "p95_us": {
+        "median": 530.976,
+        "min": 517.021,
+        "max": 579.046,
+        "runs": 3,
+        "values": [
+          517.021,
+          530.976,
+          579.046
+        ]
+      },
+      "p99_us": {
+        "median": 546.966,
+        "min": 539.272,
+        "max": 609.256,
+        "runs": 3,
+        "values": [
+          539.272,
+          546.966,
+          609.256
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1317.579,
+        "min": 1310.355,
+        "max": 1325.523,
+        "runs": 3,
+        "values": [
+          1317.579,
+          1310.355,
+          1325.523
+        ]
+      },
+      "p95_us": {
+        "median": 1403.034,
+        "min": 1369.279,
+        "max": 1469.347,
+        "runs": 3,
+        "values": [
+          1369.279,
+          1469.347,
+          1403.034
+        ]
+      },
+      "p99_us": {
+        "median": 1745.017,
+        "min": 1404.56,
+        "max": 2652.692,
+        "runs": 3,
+        "values": [
+          1404.56,
+          2652.692,
+          1745.017
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 20247.841,
+        "min": 19869.628,
+        "max": 20285.92,
+        "runs": 3,
+        "values": [
+          19869.628,
+          20285.92,
+          20247.841
+        ]
+      },
+      "p95_us": {
+        "median": 20999.518,
+        "min": 20283.625,
+        "max": 21333.671,
+        "runs": 3,
+        "values": [
+          20283.625,
+          20999.518,
+          21333.671
+        ]
+      },
+      "p99_us": {
+        "median": 21465.212,
+        "min": 20464.66,
+        "max": 21742.096,
+        "runs": 3,
+        "values": [
+          20464.66,
+          21742.096,
+          21465.212
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 79.801,
+        "min": 79.736,
+        "max": 79.865,
+        "runs": 3,
+        "values": [
+          79.865,
+          79.801,
+          79.736
+        ]
+      },
+      "p95_us": {
+        "median": 89.304,
+        "min": 85.368,
+        "max": 90.2,
+        "runs": 3,
+        "values": [
+          89.304,
+          90.2,
+          85.368
+        ]
+      },
+      "p99_us": {
+        "median": 100.823,
+        "min": 95.095,
+        "max": 105.43,
+        "runs": 3,
+        "values": [
+          100.823,
+          105.43,
+          95.095
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 458.133,
+        "min": 458.132,
+        "max": 460.279,
+        "runs": 3,
+        "values": [
+          460.279,
+          458.133,
+          458.132
+        ]
+      },
+      "p95_us": {
+        "median": 495.985,
+        "min": 485.554,
+        "max": 503.539,
+        "runs": 3,
+        "values": [
+          503.539,
+          495.985,
+          485.554
+        ]
+      },
+      "p99_us": {
+        "median": 512.975,
+        "min": 511.087,
+        "max": 527.505,
+        "runs": 3,
+        "values": [
+          527.505,
+          511.087,
+          512.975
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1311.108,
+        "min": 1295.883,
+        "max": 1337.793,
+        "runs": 3,
+        "values": [
+          1295.883,
+          1311.108,
+          1337.793
+        ]
+      },
+      "p95_us": {
+        "median": 1480.244,
+        "min": 1341.352,
+        "max": 1535.759,
+        "runs": 3,
+        "values": [
+          1341.352,
+          1535.759,
+          1480.244
+        ]
+      },
+      "p99_us": {
+        "median": 1880.365,
+        "min": 1374.021,
+        "max": 2528.432,
+        "runs": 3,
+        "values": [
+          1374.021,
+          2528.432,
+          1880.365
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 20344.308,
+        "min": 20121.298,
+        "max": 20493.826,
+        "runs": 3,
+        "values": [
+          20121.298,
+          20344.308,
+          20493.826
+        ]
+      },
+      "p95_us": {
+        "median": 21718.322,
+        "min": 20696.924,
+        "max": 22106.505,
+        "runs": 3,
+        "values": [
+          20696.924,
+          21718.322,
+          22106.505
+        ]
+      },
+      "p99_us": {
+        "median": 22348.278,
+        "min": 20809.621,
+        "max": 22786.664,
+        "runs": 3,
+        "values": [
+          20809.621,
+          22348.278,
+          22786.664
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1603.444,
+        "min": 1600.729,
+        "max": 1622.544,
+        "runs": 3,
+        "values": [
+          1600.729,
+          1603.444,
+          1622.544
+        ]
+      },
+      "p95_us": {
+        "median": 1624.425,
+        "min": 1622.42,
+        "max": 1648.035,
+        "runs": 3,
+        "values": [
+          1622.42,
+          1624.425,
+          1648.035
+        ]
+      },
+      "p99_us": {
+        "median": 1643.88,
+        "min": 1635.214,
+        "max": 1670.345,
+        "runs": 3,
+        "values": [
+          1643.88,
+          1635.214,
+          1670.345
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1365.155,
+        "min": 1360.16,
+        "max": 1375.872,
+        "runs": 3,
+        "values": [
+          1365.155,
+          1360.16,
+          1375.872
+        ]
+      },
+      "p95_us": {
+        "median": 1386.115,
+        "min": 1378.94,
+        "max": 1416.933,
+        "runs": 3,
+        "values": [
+          1386.115,
+          1378.94,
+          1416.933
+        ]
+      },
+      "p99_us": {
+        "median": 1403.015,
+        "min": 1393.081,
+        "max": 1436.372,
+        "runs": 3,
+        "values": [
+          1403.015,
+          1393.081,
+          1436.372
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1382.38,
+        "min": 1377.935,
+        "max": 1441.243,
+        "runs": 3,
+        "values": [
+          1377.935,
+          1382.38,
+          1441.243
+        ]
+      },
+      "p95_us": {
+        "median": 1783.872,
+        "min": 1502.233,
+        "max": 1809.356,
+        "runs": 3,
+        "values": [
+          1783.872,
+          1502.233,
+          1809.356
+        ]
+      },
+      "p99_us": {
+        "median": 1797.053,
+        "min": 1782.976,
+        "max": 1825.786,
+        "runs": 3,
+        "values": [
+          1797.053,
+          1782.976,
+          1825.786
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 4800.801,
+        "min": 4785.316,
+        "max": 4975.043,
+        "runs": 3,
+        "values": [
+          4785.316,
+          4800.801,
+          4975.043
+        ]
+      },
+      "p95_us": {
+        "median": 5069.885,
+        "min": 5008.1,
+        "max": 5602.829,
+        "runs": 3,
+        "values": [
+          5008.1,
+          5069.885,
+          5602.829
+        ]
+      },
+      "p99_us": {
+        "median": 6029.899,
+        "min": 5127.046,
+        "max": 6912.161,
+        "runs": 3,
+        "values": [
+          6029.899,
+          5127.046,
+          6912.161
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1609.736,
+        "min": 1608.299,
+        "max": 1623.43,
+        "runs": 3,
+        "values": [
+          1608.299,
+          1609.736,
+          1623.43
+        ]
+      },
+      "p95_us": {
+        "median": 1627.91,
+        "min": 1625.897,
+        "max": 1662.754,
+        "runs": 3,
+        "values": [
+          1625.897,
+          1627.91,
+          1662.754
+        ]
+      },
+      "p99_us": {
+        "median": 1643.909,
+        "min": 1634.185,
+        "max": 1698.142,
+        "runs": 3,
+        "values": [
+          1634.185,
+          1643.909,
+          1698.142
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 1370.591,
+        "min": 1368.769,
+        "max": 1388.124,
+        "runs": 3,
+        "values": [
+          1368.769,
+          1370.591,
+          1388.124
+        ]
+      },
+      "p95_us": {
+        "median": 1400.51,
+        "min": 1399.58,
+        "max": 1432.984,
+        "runs": 3,
+        "values": [
+          1400.51,
+          1399.58,
+          1432.984
+        ]
+      },
+      "p99_us": {
+        "median": 1417.083,
+        "min": 1412.157,
+        "max": 1482.387,
+        "runs": 3,
+        "values": [
+          1412.157,
+          1417.083,
+          1482.387
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1397.404,
+        "min": 1388.543,
+        "max": 1437.623,
+        "runs": 3,
+        "values": [
+          1388.543,
+          1397.404,
+          1437.623
+        ]
+      },
+      "p95_us": {
+        "median": 1799.543,
+        "min": 1789.466,
+        "max": 1865.039,
+        "runs": 3,
+        "values": [
+          1789.466,
+          1799.543,
+          1865.039
+        ]
+      },
+      "p99_us": {
+        "median": 1812.245,
+        "min": 1805.209,
+        "max": 2024.863,
+        "runs": 3,
+        "values": [
+          1805.209,
+          1812.245,
+          2024.863
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 5073.154,
+        "min": 5071.882,
+        "max": 5109.306,
+        "runs": 3,
+        "values": [
+          5071.882,
+          5073.154,
+          5109.306
+        ]
+      },
+      "p95_us": {
+        "median": 5791.751,
+        "min": 5605.552,
+        "max": 6127.225,
+        "runs": 3,
+        "values": [
+          5791.751,
+          5605.552,
+          6127.225
+        ]
+      },
+      "p99_us": {
+        "median": 8348.037,
+        "min": 6914.91,
+        "max": 8502.047,
+        "runs": 3,
+        "values": [
+          6914.91,
+          8502.047,
+          8348.037
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 80.241,
+        "min": 80.231,
+        "max": 81.701,
+        "runs": 3,
+        "values": [
+          80.241,
+          80.231,
+          81.701
+        ]
+      },
+      "p95_us": {
+        "median": 83.172,
+        "min": 83.011,
+        "max": 92.651,
+        "runs": 3,
+        "values": [
+          83.172,
+          83.011,
+          92.651
+        ]
+      },
+      "p99_us": {
+        "median": 96.041,
+        "min": 92.791,
+        "max": 103.73,
+        "runs": 3,
+        "values": [
+          92.791,
+          96.041,
+          103.73
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 431.396,
+        "min": 417.867,
+        "max": 438.653,
+        "runs": 3,
+        "values": [
+          417.867,
+          431.396,
+          438.653
+        ]
+      },
+      "p95_us": {
+        "median": 467.166,
+        "min": 448.938,
+        "max": 483.754,
+        "runs": 3,
+        "values": [
+          448.938,
+          467.166,
+          483.754
+        ]
+      },
+      "p99_us": {
+        "median": 488.567,
+        "min": 469.838,
+        "max": 504.624,
+        "runs": 3,
+        "values": [
+          469.838,
+          488.567,
+          504.624
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1168.5,
+        "min": 1161.877,
+        "max": 1207.54,
+        "runs": 3,
+        "values": [
+          1168.5,
+          1161.877,
+          1207.54
+        ]
+      },
+      "p95_us": {
+        "median": 1244.558,
+        "min": 1222.081,
+        "max": 1358.831,
+        "runs": 3,
+        "values": [
+          1222.081,
+          1244.558,
+          1358.831
+        ]
+      },
+      "p99_us": {
+        "median": 1282.668,
+        "min": 1253.942,
+        "max": 1728.905,
+        "runs": 3,
+        "values": [
+          1253.942,
+          1282.668,
+          1728.905
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 18720.573,
+        "min": 18118.052,
+        "max": 18839.445,
+        "runs": 3,
+        "values": [
+          18720.573,
+          18839.445,
+          18118.052
+        ]
+      },
+      "p95_us": {
+        "median": 19561.925,
+        "min": 19505.195,
+        "max": 19599.224,
+        "runs": 3,
+        "values": [
+          19505.195,
+          19561.925,
+          19599.224
+        ]
+      },
+      "p99_us": {
+        "median": 19764.529,
+        "min": 19671.409,
+        "max": 20126.559,
+        "runs": 3,
+        "values": [
+          19671.409,
+          19764.529,
+          20126.559
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 1,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 79.801,
+        "min": 79.8,
+        "max": 80.12,
+        "runs": 3,
+        "values": [
+          79.801,
+          79.8,
+          80.12
+        ]
+      },
+      "p95_us": {
+        "median": 88.984,
+        "min": 83.672,
+        "max": 90.808,
+        "runs": 3,
+        "values": [
+          88.984,
+          83.672,
+          90.808
+        ]
+      },
+      "p99_us": {
+        "median": 102.839,
+        "min": 93.175,
+        "max": 106.87,
+        "runs": 3,
+        "values": [
+          102.839,
+          93.175,
+          106.87
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000,
+        2000,
+        2000
+      ],
+      "p50_us": {
+        "median": 418.297,
+        "min": 415.225,
+        "max": 432.598,
+        "runs": 3,
+        "values": [
+          418.297,
+          415.225,
+          432.598
+        ]
+      },
+      "p95_us": {
+        "median": 458.614,
+        "min": 456.373,
+        "max": 480.211,
+        "runs": 3,
+        "values": [
+          458.614,
+          456.373,
+          480.211
+        ]
+      },
+      "p99_us": {
+        "median": 482.516,
+        "min": 474.163,
+        "max": 502.48,
+        "runs": 3,
+        "values": [
+          482.516,
+          474.163,
+          502.48
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 65536,
+      "samples_per_run": [
+        1000,
+        1000,
+        1000
+      ],
+      "p50_us": {
+        "median": 1111.736,
+        "min": 1104.568,
+        "max": 1158.193,
+        "runs": 3,
+        "values": [
+          1111.736,
+          1104.568,
+          1158.193
+        ]
+      },
+      "p95_us": {
+        "median": 1180.242,
+        "min": 1173.137,
+        "max": 1368.19,
+        "runs": 3,
+        "values": [
+          1180.242,
+          1173.137,
+          1368.19
+        ]
+      },
+      "p99_us": {
+        "median": 1222.959,
+        "min": 1211.726,
+        "max": 1862.127,
+        "runs": 3,
+        "values": [
+          1222.959,
+          1211.726,
+          1862.127
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "bytes": 1048576,
+      "samples_per_run": [
+        100,
+        100,
+        100
+      ],
+      "p50_us": {
+        "median": 19182.86,
+        "min": 19071.335,
+        "max": 19362.42,
+        "runs": 3,
+        "values": [
+          19362.42,
+          19182.86,
+          19071.335
+        ]
+      },
+      "p95_us": {
+        "median": 20010.046,
+        "min": 19982.778,
+        "max": 20553.659,
+        "runs": 3,
+        "values": [
+          19982.778,
+          20010.046,
+          20553.659
+        ]
+      },
+      "p99_us": {
+        "median": 20304.482,
+        "min": 20067.858,
+        "max": 21579.0,
+        "runs": 3,
+        "values": [
+          20067.858,
+          20304.482,
+          21579.0
+        ]
+      }
+    }
+  ],
+  "bulk": [
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "label": "duplex",
+      "MiB_s": {
+        "median": 186.3470354149788,
+        "min": 178.7719084474498,
+        "max": 187.76456743587494,
+        "runs": 3,
+        "values": [
+          186.3470354149788,
+          178.7719084474498,
+          187.76456743587494
+        ]
+      },
+      "seconds": {
+        "median": 6.868904553,
+        "min": 6.817047633,
+        "max": 7.159961602,
+        "runs": 3,
+        "values": [
+          6.868904553,
+          7.159961602,
+          6.817047633
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 341.29901403373043,
+        "min": 340.4016855998966,
+        "max": 342.8871239581992,
+        "runs": 3,
+        "values": [
+          342.8871239581992,
+          341.29901403373043,
+          340.4016855998966
+        ]
+      },
+      "seconds": {
+        "median": 3.750377081,
+        "min": 3.733006901,
+        "max": 3.760263401,
+        "runs": 3,
+        "values": [
+          3.733006901,
+          3.750377081,
+          3.760263401
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "label": "duplex",
+      "MiB_s": {
+        "median": 318.7651566979681,
+        "min": 316.93838125886856,
+        "max": 323.4130662178576,
+        "runs": 3,
+        "values": [
+          323.4130662178576,
+          316.93838125886856,
+          318.7651566979681
+        ]
+      },
+      "seconds": {
+        "median": 4.015495336,
+        "min": 3.95778691,
+        "max": 4.038639924,
+        "runs": 3,
+        "values": [
+          3.95778691,
+          4.038639924,
+          4.015495336
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 349.92848888739263,
+        "min": 345.64520612424275,
+        "max": 351.6762056598264,
+        "runs": 3,
+        "values": [
+          349.92848888739263,
+          351.6762056598264,
+          345.64520612424275
+        ]
+      },
+      "seconds": {
+        "median": 3.657890228,
+        "min": 3.639711699,
+        "max": 3.703219305,
+        "runs": 3,
+        "values": [
+          3.657890228,
+          3.639711699,
+          3.703219305
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 91.28304325429717,
+        "min": 91.13449720089007,
+        "max": 91.99555151859558,
+        "runs": 3,
+        "values": [
+          91.99555151859558,
+          91.28304325429717,
+          91.13449720089007
+        ]
+      },
+      "seconds": {
+        "median": 14.022319528,
+        "min": 13.913716249,
+        "max": 14.04517542,
+        "runs": 3,
+        "values": [
+          13.913716249,
+          14.022319528,
+          14.04517542
+        ]
+      }
+    },
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 107.41339251427257,
+        "min": 105.45725450401318,
+        "max": 107.88360830567085,
+        "runs": 3,
+        "values": [
+          107.88360830567085,
+          105.45725450401318,
+          107.41339251427257
+        ]
+      },
+      "seconds": {
+        "median": 11.916577347,
+        "min": 11.864638383,
+        "max": 12.137619228,
+        "runs": 3,
+        "values": [
+          11.864638383,
+          12.137619228,
+          11.916577347
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "label": "duplex",
+      "MiB_s": {
+        "median": 266.4166901619303,
+        "min": 242.8254657466656,
+        "max": 275.7073225858462,
+        "runs": 3,
+        "values": [
+          266.4166901619303,
+          275.7073225858462,
+          242.8254657466656
+        ]
+      },
+      "seconds": {
+        "median": 4.804503799,
+        "min": 4.642604295,
+        "max": 5.271275795,
+        "runs": 3,
+        "values": [
+          4.804503799,
+          4.642604295,
+          5.271275795
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "host-orin",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 372.0427819063727,
+        "min": 355.15454227493365,
+        "max": 372.046996283633,
+        "runs": 3,
+        "values": [
+          372.046996283633,
+          372.0427819063727,
+          355.15454227493365
+        ]
+      },
+      "seconds": {
+        "median": 3.440464544,
+        "min": 3.440425572,
+        "max": 3.604064844,
+        "runs": 3,
+        "values": [
+          3.440425572,
+          3.440464544,
+          3.604064844
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "label": "duplex",
+      "MiB_s": {
+        "median": 505.91836124808975,
+        "min": 396.60104882380546,
+        "max": 575.2636505330706,
+        "runs": 3,
+        "values": [
+          505.91836124808975,
+          575.2636505330706,
+          396.60104882380546
+        ]
+      },
+      "seconds": {
+        "median": 2.530052471,
+        "min": 2.225066713,
+        "max": 3.227424647,
+        "runs": 3,
+        "values": [
+          2.530052471,
+          2.225066713,
+          3.227424647
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "ncm",
+      "direction": "orin-host",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 522.0829293500832,
+        "min": 506.3081051418888,
+        "max": 551.4855650378897,
+        "runs": 3,
+        "values": [
+          522.0829293500832,
+          551.4855650378897,
+          506.3081051418888
+        ]
+      },
+      "seconds": {
+        "median": 2.451717779,
+        "min": 2.321003633,
+        "max": 2.528104897,
+        "runs": 3,
+        "values": [
+          2.451717779,
+          2.321003633,
+          2.528104897
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 98.22539460148205,
+        "min": 90.7265301796078,
+        "max": 98.90248767865681,
+        "runs": 3,
+        "values": [
+          90.7265301796078,
+          98.90248767865681,
+          98.22539460148205
+        ]
+      },
+      "seconds": {
+        "median": 13.031253325,
+        "min": 12.942040489,
+        "max": 14.108331901,
+        "runs": 3,
+        "values": [
+          14.108331901,
+          12.942040489,
+          13.031253325
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "orin-host",
+      "label": "unloaded",
+      "MiB_s": {
+        "median": 141.88003283766363,
+        "min": 127.50220615448629,
+        "max": 142.39812065576925,
+        "runs": 3,
+        "values": [
+          142.39812065576925,
+          141.88003283766363,
+          127.50220615448629
+        ]
+      },
+      "seconds": {
+        "median": 9.021706398,
+        "min": 8.988882677,
+        "max": 10.039041979,
+        "runs": 3,
+        "values": [
+          8.988882677,
+          9.021706398,
+          10.039041979
+        ]
+      }
+    }
+  ],
+  "loaded": [
+    {
+      "generation": 1,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000
+      ],
+      "paired_idle": {
+        "p50_us": {
+          "median": 476.691,
+          "min": 476.691,
+          "max": 476.691,
+          "runs": 1,
+          "values": [
+            476.691
+          ]
+        },
+        "p95_us": {
+          "median": 517.021,
+          "min": 517.021,
+          "max": 517.021,
+          "runs": 1,
+          "values": [
+            517.021
+          ]
+        },
+        "p99_us": {
+          "median": 539.272,
+          "min": 539.272,
+          "max": 539.272,
+          "runs": 1,
+          "values": [
+            539.272
+          ]
+        }
+      },
+      "p50_us": {
+        "median": 3713.683,
+        "min": 3713.683,
+        "max": 3713.683,
+        "runs": 1,
+        "values": [
+          3713.683
+        ]
+      },
+      "p95_us": {
+        "median": 4507.858,
+        "min": 4507.858,
+        "max": 4507.858,
+        "runs": 1,
+        "values": [
+          4507.858
+        ]
+      },
+      "p99_us": {
+        "median": 5093.459,
+        "min": 5093.459,
+        "max": 5093.459,
+        "runs": 1,
+        "values": [
+          5093.459
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "transport": "rndis",
+      "direction": "host-orin",
+      "bytes": 20480,
+      "samples_per_run": [
+        2000
+      ],
+      "paired_idle": {
+        "p50_us": {
+          "median": 417.867,
+          "min": 417.867,
+          "max": 417.867,
+          "runs": 1,
+          "values": [
+            417.867
+          ]
+        },
+        "p95_us": {
+          "median": 448.938,
+          "min": 448.938,
+          "max": 448.938,
+          "runs": 1,
+          "values": [
+            448.938
+          ]
+        },
+        "p99_us": {
+          "median": 469.838,
+          "min": 469.838,
+          "max": 469.838,
+          "runs": 1,
+          "values": [
+            469.838
+          ]
+        }
+      },
+      "p50_us": {
+        "median": 3480.005,
+        "min": 3480.005,
+        "max": 3480.005,
+        "runs": 1,
+        "values": [
+          3480.005
+        ]
+      },
+      "p95_us": {
+        "median": 4071.524,
+        "min": 4071.524,
+        "max": 4071.524,
+        "runs": 1,
+        "values": [
+          4071.524
+        ]
+      },
+      "p99_us": {
+        "median": 4340.148,
+        "min": 4340.148,
+        "max": 4340.148,
+        "runs": 1,
+        "values": [
+          4340.148
+        ]
+      }
+    }
+  ],
+  "paired_throughput_ratios": [
+    {
+      "transport": "ncm",
+      "direction": "host-orin",
+      "paired_gen2_over_gen1": {
+        "median": 1.085042191111815,
+        "min": 1.0433395523557347,
+        "max": 1.090078689385267,
+        "runs": 3,
+        "values": [
+          1.085042191111815,
+          1.090078689385267,
+          1.0433395523557347
+        ]
+      }
+    },
+    {
+      "transport": "ncm",
+      "direction": "orin-host",
+      "paired_gen2_over_gen1": {
+        "median": 1.4919703480275652,
+        "min": 1.4648202728432909,
+        "max": 1.568162861639088,
+        "runs": 3,
+        "values": [
+          1.4919703480275652,
+          1.568162861639088,
+          1.4648202728432909
+        ]
+      }
+    },
+    {
+      "transport": "rndis",
+      "direction": "host-orin",
+      "paired_gen2_over_gen1": {
+        "median": 1.077806951466044,
+        "min": 0.9862056227932798,
+        "max": 1.0834705346439133,
+        "runs": 3,
+        "values": [
+          0.9862056227932798,
+          1.0834705346439133,
+          1.077806951466044
+        ]
+      }
+    },
+    {
+      "transport": "rndis",
+      "direction": "orin-host",
+      "paired_gen2_over_gen1": {
+        "median": 1.3199235999996133,
+        "min": 1.1870233605883402,
+        "max": 1.3453795426872637,
+        "runs": 3,
+        "values": [
+          1.3199235999996133,
+          1.3453795426872637,
+          1.1870233605883402
+        ]
+      }
+    }
+  ],
+  "host_loadavg_range": [
+    6.6357421875,
+    14.27490234375
+  ],
+  "orin_loadavg_range": [
+    1.1083984375,
+    4.75927734375
+  ],
+  "max_trial_rx_dropped": {
+    "host": 101,
+    "orin": 903
+  }
+}

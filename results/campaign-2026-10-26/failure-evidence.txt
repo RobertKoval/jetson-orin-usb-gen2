@@ -1,0 +1,15 @@
+Selected kernel log lines, device-local time UTC+02. Host/interface identifiers replaced.
+Only enumeration/watchdog lines are retained; this is not a complete journal.
+
+Oct 26 23:04:59 HOST kernel: usb 2-1: new SuperSpeed Plus Gen 2x1 USB device number 28 using xhci_hcd
+Oct 26 23:05:07 HOST kernel: cdc_ncm 2-1:1.4 NCM_IF: NETDEV WATCHDOG: CPU: 28: transmit queue 0 timed out 5598 ms
+Oct 26 23:05:11 HOST kernel: rndis_host 2-1:1.0 RNDIS_IF: NETDEV WATCHDOG: CPU: 29: transmit queue 0 timed out 5109 ms
+Oct 26 23:05:12 HOST kernel: cdc_ncm 2-1:1.4 NCM_IF: NETDEV WATCHDOG: CPU: 29: transmit queue 0 timed out 5438 ms
+Oct 26 23:11:38 HOST kernel: usb 2-1: new SuperSpeed USB device number 29 using xhci_hcd
+Oct 26 23:13:41 HOST kernel: usb 2-1: new SuperSpeed Plus Gen 2x1 USB device number 30 using xhci_hcd
+Oct 26 23:17:16 HOST kernel: usb 2-1: new SuperSpeed USB device number 31 using xhci_hcd
+Oct 26 23:20:50 HOST kernel: usb 2-1: new SuperSpeed Plus Gen 2x1 USB device number 32 using xhci_hcd
+Oct 26 23:24:17 HOST kernel: rndis_host 2-1:1.0 RNDIS_IF: NETDEV WATCHDOG: CPU: 26: transmit queue 0 timed out 5006 ms
+Oct 26 23:24:17 HOST kernel: cdc_ncm 2-1:1.4 NCM_IF: NETDEV WATCHDOG: CPU: 10: transmit queue 0 timed out 5006 ms
+
+Orin journal also contains 20 drop_caches=3 events in the queried interval; first Oct 26 23:23:15, last Oct 26 23:24:59. These were not issued by the benchmark. Concurrent activity is a confounder, not an established cause.

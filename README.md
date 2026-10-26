@@ -17,6 +17,8 @@ CPU-buffer TCP transfer of **1.25 GiB**, the same host port and patched driver, 
 
 With both directions active, the Gen2 transfers took 4.704 s and 2.382 s. RNDIS echo of a 20 KiB message measured **0.410 ms median RTT** (100 samples). These CPU-buffer results do not include CUDA staging or model inference. See [methodology and limitations](docs/RESULTS.md) and [sanitized measurements](results/measurements.json).
 
+The [expanded campaign](docs/BENCHMARKS.md) adds three completed paired comparisons: NCM medians **341→372 MiB/s** host→Orin and **350→522 MiB/s** Orin→host, plus RTT, duplex and loaded-latency data. **It stopped during pair4 after both host TX queues hit NETDEV WATCHDOG under mixed NCM/RNDIS load.** Raw failures are retained; the driver remains experimental and the stall is unresolved.
+
 ## What changes
 
 Two independent layers need attention:
