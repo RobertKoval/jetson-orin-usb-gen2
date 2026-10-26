@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-26",
+  "scope": "one AGX Orin devkit; CPU-buffer TCP; shared host",
+  "bulk": [
+    {
+      "direction": "host-orin",
+      "tag": "guarded-gen1",
+      "bytes": 1342177280,
+      "seconds": 3.7276673539890908,
+      "MiB_s": 343.37827881295067,
+      "Gbit_s": 2.8804657766765485,
+      "path_verified": true
+    },
+    {
+      "direction": "orin-host",
+      "tag": "guarded-gen1",
+      "bytes": 1342177280,
+      "seconds": 3.5754312310000387,
+      "MiB_s": 357.9987747777175,
+      "Gbit_s": 3.003111386090559,
+      "path_verified": true
+    },
+    {
+      "direction": "host-orin",
+      "tag": "guarded-gen2",
+      "bytes": 1342177280,
+      "seconds": 3.37863926999853,
+      "MiB_s": 378.85074366064447,
+      "Gbit_s": 3.1780303790776316,
+      "path_verified": true
+    },
+    {
+      "direction": "orin-host",
+      "tag": "guarded-gen2",
+      "bytes": 1342177280,
+      "seconds": 2.323942952000152,
+      "MiB_s": 550.7880470552601,
+      "Gbit_s": 4.620345017832132,
+      "path_verified": true
+    },
+    {
+      "direction": "orin-host",
+      "tag": "final-gen2-duplex",
+      "bytes": 1342177280,
+      "seconds": 2.381665695000038,
+      "MiB_s": 537.4389876325525,
+      "Gbit_s": 4.5083649911663315,
+      "path_verified": true
+    },
+    {
+      "direction": "host-orin",
+      "tag": "final-gen2-duplex",
+      "bytes": 1342177280,
+      "seconds": 4.704040637006983,
+      "MiB_s": 272.1064928585352,
+      "Gbit_s": 2.282594702845051,
+      "path_verified": true
+    }
+  ],
+  "integrity": [
+    {
+      "direction": "host-orin",
+      "bytes": 1342177280,
+      "sha256": "78e2ca85f0fb48ea122cff838c9d6239d22cc8daebee83c2a2c4402510475d64",
+      "verified": true
+    },
+    {
+      "direction": "orin-host",
+      "bytes": 1342177280,
+      "sha256": "78e2ca85f0fb48ea122cff838c9d6239d22cc8daebee83c2a2c4402510475d64",
+      "verified": true
+    }
+  ]
+}

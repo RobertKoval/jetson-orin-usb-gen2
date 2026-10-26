@@ -1,0 +1,196 @@
+--- a/tegra-xudc.c
++++ b/tegra-xudc.c
+@@ -88,6 +88,7 @@
+ #define  PORTSC_PS_LS 0x2
+ #define  PORTSC_PS_HS 0x3
+ #define  PORTSC_PS_SS 0x4
++#define  PORTSC_PS_SSP 0x5
+ #define  PORTSC_LWS BIT(16)
+ #define  PORTSC_CSC BIT(17)
+ #define  PORTSC_WRC BIT(19)
+@@ -739,7 +740,7 @@
+ 		PORTSC_PLS_SHIFT;
+ 
+ 	/* Direct link to U0 if disconnected in RESUME or U2. */
+-	if (xudc->soc->pls_quirk && xudc->gadget.speed == USB_SPEED_SUPER &&
++	if (xudc->soc->pls_quirk && xudc->gadget.speed >= USB_SPEED_SUPER &&
+ 	    (pls == PORTSC_PLS_RESUME || pls == PORTSC_PLS_U2)) {
+ 		val = xudc_readl(xudc, PORTPM);
+ 		val |= PORTPM_FRWE;
+@@ -751,9 +752,18 @@
+ 		xudc_writel(xudc, val, PORTSC);
+ 	}
+ 
+-	/* Wait for disconnect event. */
+-	if (connected)
+-		wait_for_completion(&xudc->disconnect_complete);
++	/* Preserve normal disconnect cleanup; bound the already-stopped case. */
++	if (connected) {
++		while (!wait_for_completion_timeout(&xudc->disconnect_complete,
++						   msecs_to_jiffies(1000))) {
++			if (!READ_ONCE(xudc->driver) &&
++			    !(xudc_readl(xudc, PORTSC) & (PORTSC_CCS | PORTSC_PED)) &&
++			    !(xudc_readl(xudc, CTRL) & (CTRL_ENABLE | CTRL_RUN | CTRL_IE))) {
++				dev_warn(xudc->dev, "lost disconnect event after gadget stop\n");
++				break;
++			}
++		}
++	}
+ 
+ 	/* Make sure interrupt handler has completed before powergating. */
+ 	synchronize_irq(xudc->irq);
+@@ -1624,7 +1634,7 @@
+ 	u32 val;
+ 
+ 	maxpacket = usb_endpoint_maxp(desc);
+-	if (xudc->gadget.speed == USB_SPEED_SUPER) {
++	if (xudc->gadget.speed >= USB_SPEED_SUPER) {
+ 		if (!usb_endpoint_xfer_control(desc))
+ 			maxburst = comp_desc->bMaxBurst;
+ 
+@@ -1648,7 +1658,7 @@
+ 
+ 	ep_ctx_write_state(ep->context, EP_STATE_RUNNING);
+ 	ep_ctx_write_interval(ep->context, desc->bInterval);
+-	if (xudc->gadget.speed == USB_SPEED_SUPER) {
++	if (xudc->gadget.speed >= USB_SPEED_SUPER) {
+ 		if (usb_endpoint_xfer_isoc(desc)) {
+ 			ep_ctx_write_mult(ep->context,
+ 					  comp_desc->bmAttributes & 0x3);
+@@ -1792,7 +1802,7 @@
+ 	unsigned int i;
+ 	u32 val;
+ 
+-	if (xudc->gadget.speed == USB_SPEED_SUPER &&
++	if (xudc->gadget.speed >= USB_SPEED_SUPER &&
+ 		!usb_endpoint_xfer_control(desc) && !ep->usb_ep.comp_desc)
+ 		return -EINVAL;
+ 
+@@ -2024,12 +2034,12 @@
+ 
+ 	if (((xudc->gadget.speed <= USB_SPEED_HIGH) &&
+ 	     (val & PORTPM_RWE)) ||
+-	    ((xudc->gadget.speed == USB_SPEED_SUPER) &&
++	    ((xudc->gadget.speed >= USB_SPEED_SUPER) &&
+ 	     (val & PORTPM_FRWE))) {
+ 		tegra_xudc_resume_device_state(xudc);
+ 
+ 		/* Send Device Notification packet. */
+-		if (xudc->gadget.speed == USB_SPEED_SUPER) {
++		if (xudc->gadget.speed >= USB_SPEED_SUPER) {
+ 			val = DEVNOTIF_LO_TYPE(DEVNOTIF_LO_TYPE_FUNCTION_WAKE)
+ 					     | DEVNOTIF_LO_TRIG;
+ 			xudc_writel(xudc, 0, DEVNOTIF_HI);
+@@ -2278,7 +2288,7 @@
+ 	case USB_RECIP_DEVICE:
+ 		switch (feature) {
+ 		case USB_DEVICE_REMOTE_WAKEUP:
+-			if ((xudc->gadget.speed == USB_SPEED_SUPER) ||
++			if ((xudc->gadget.speed >= USB_SPEED_SUPER) ||
+ 			    (xudc->device_state == USB_STATE_DEFAULT))
+ 				return -EINVAL;
+ 
+@@ -2293,7 +2303,7 @@
+ 		case USB_DEVICE_U1_ENABLE:
+ 		case USB_DEVICE_U2_ENABLE:
+ 			if ((xudc->device_state != USB_STATE_CONFIGURED) ||
+-			    (xudc->gadget.speed != USB_SPEED_SUPER))
++			    (xudc->gadget.speed < USB_SPEED_SUPER))
+ 				return -EINVAL;
+ 
+ 			val = xudc_readl(xudc, PORTPM);
+@@ -2397,7 +2407,7 @@
+ 		    (val & PORTPM_RWE))
+ 			status |= BIT(USB_DEVICE_REMOTE_WAKEUP);
+ 
+-		if (xudc->gadget.speed == USB_SPEED_SUPER) {
++		if (xudc->gadget.speed >= USB_SPEED_SUPER) {
+ 			if (val & PORTPM_U1E)
+ 				status |= BIT(USB_DEV_STAT_U1_ENABLED);
+ 			if (val & PORTPM_U2E)
+@@ -2405,7 +2415,7 @@
+ 		}
+ 		break;
+ 	case USB_RECIP_INTERFACE:
+-		if (xudc->gadget.speed == USB_SPEED_SUPER) {
++		if (xudc->gadget.speed >= USB_SPEED_SUPER) {
+ 			status |= USB_INTRF_STAT_FUNC_RW_CAP;
+ 			val = xudc_readl(xudc, PORTPM);
+ 			if (val & PORTPM_FRWE)
+@@ -2851,7 +2861,10 @@
+ 	u16 maxpacket;
+ 	u32 val;
+ 
++	xudc->gadget.ssp_rate = USB_SSP_GEN_UNKNOWN;
+ 	val = (xudc_readl(xudc, PORTSC) & PORTSC_PS_MASK) >> PORTSC_PS_SHIFT;
++	dev_info(xudc->dev, "GEN2_PROBE: PORTSC=%#x PS=%u\n",
++		 xudc_readl(xudc, PORTSC), val);
+ 	switch (val) {
+ 	case PORTSC_PS_LS:
+ 		xudc->gadget.speed = USB_SPEED_LOW;
+@@ -2865,6 +2878,10 @@
+ 	case PORTSC_PS_SS:
+ 		xudc->gadget.speed = USB_SPEED_SUPER;
+ 		break;
++	case PORTSC_PS_SSP:
++		xudc->gadget.speed = USB_SPEED_SUPER_PLUS;
++		xudc->gadget.ssp_rate = USB_SSP_GEN_2x1;
++		break;
+ 	default:
+ 		xudc->gadget.speed = USB_SPEED_UNKNOWN;
+ 		break;
+@@ -2875,7 +2892,7 @@
+ 
+ 	xudc->setup_state = WAIT_FOR_SETUP;
+ 
+-	if (xudc->gadget.speed == USB_SPEED_SUPER)
++	if (xudc->gadget.speed >= USB_SPEED_SUPER)
+ 		maxpacket = 512;
+ 	else
+ 		maxpacket = 64;
+@@ -3049,7 +3066,7 @@
+ 				tegra_xudc_port_resume(xudc);
+ 			break;
+ 		case PORTSC_PLS_RESUME:
+-			if (xudc->gadget.speed == USB_SPEED_SUPER)
++			if (xudc->gadget.speed >= USB_SPEED_SUPER)
+ 				tegra_xudc_port_resume(xudc);
+ 			break;
+ 		case PORTSC_PLS_INACTIVE:
+@@ -3885,6 +3902,10 @@
+ 	xudc->gadget.ep0 = &xudc->ep[0].usb_ep;
+ 	xudc->gadget.name = "tegra-xudc";
+ 	xudc->gadget.max_speed = USB_SPEED_SUPER;
++	if (of_device_is_compatible(pdev->dev.of_node, "nvidia,tegra234-xudc")) {
++		xudc->gadget.max_speed = USB_SPEED_SUPER_PLUS;
++		xudc->gadget.max_ssp_rate = USB_SSP_GEN_2x1;
++	}
+ 
+ 	err = usb_add_gadget_udc(&pdev->dev, &xudc->gadget);
+ 	if (err) {
+@@ -3924,12 +3945,17 @@
+ 	struct tegra_xudc *xudc = platform_get_drvdata(pdev);
+ 	unsigned int i;
+ 
++	/* Stop external producers before draining work and freeing xudc. */
++	for (i = 0; i < xudc->soc->num_phys; i++)
++		if (xudc->usbphy[i])
++			usb_unregister_notifier(xudc->usbphy[i], &xudc->vbus_nb);
+ 	pm_runtime_get_sync(xudc->dev);
+ 
++	usb_del_gadget_udc(&xudc->gadget);
++	synchronize_irq(xudc->irq);
+ 	cancel_delayed_work_sync(&xudc->plc_reset_work);
++	cancel_delayed_work_sync(&xudc->port_reset_war_work);
+ 	cancel_work_sync(&xudc->usb_role_sw_work);
+-
+-	usb_del_gadget_udc(&xudc->gadget);
+ 
+ 	tegra_xudc_free_eps(xudc);
+ 	tegra_xudc_free_event_ring(xudc);
+@@ -4090,3 +4116,5 @@
+ MODULE_AUTHOR("Hui Fu <hfu@nvidia.com>");
+ MODULE_AUTHOR("Nagarjuna Kristam <nkristam@nvidia.com>");
+ MODULE_LICENSE("GPL v2");
++
++MODULE_VERSION("orin-gen2-probe-3");

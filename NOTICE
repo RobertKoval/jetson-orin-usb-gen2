@@ -1,0 +1,11 @@
+The patch modifies NVIDIA's tegra-xudc.c from Jetson Linux R36.5.
+Original source carries SPDX-License-Identifier: GPL-2.0+ and copyrights:
+Copyright (c) 2013-2022, NVIDIA CORPORATION. All rights reserved.
+Copyright (c) 2015, Google Inc.
+The original module declares MODULE_LICENSE("GPL v2").
+The patch is distributed under GPL-2.0-or-later; see LICENSE.
+New tools and documentation: Copyright (c) 2026 Robert Koval,
+GPL-2.0-or-later unless otherwise stated.
+This is an independent experiment, not an NVIDIA-supported release.
+NVIDIA manuals, proprietary firmware, crash dumps and prebuilt kernel modules
+are not included. Obtain the original BSP source and documentation from NVIDIA.
